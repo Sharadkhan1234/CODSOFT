@@ -1,0 +1,81 @@
+
+{% if user %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+
+
+    <div class="navbar-header">
+      <a style="font-size: 30px" class="navbar-brand" href="{% url 'main' %}">SuperMart</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+      {% for i in data3 %}
+
+
+        <li style="color: white;"><a style="color: white;" href="{% url 'home' i.id %}">{{i.h}}</a></li>
+
+
+      {% endfor %}
+      </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li style="padding: 15px" data-toggle="modal" data-target="#myModal" class="w3-right"><span style="color: white;cursor: pointer;" >{{user.username}}</span></li>
+
+
+      
+      {% if user.username %}
+   
+      
+      <li class="w3-right"><a style="color: white" class="glyphicon glyphicon-log-in" href="{% url 'logout_view' %}"><b style="margin-left: 10px;color: white">Logout</b></a></li>
+
+      {% else %}
+
+      <li class="w3-right"><a class="glyphicon glyphicon-user" href="{% url 'login' %}"><b style="margin-left: 10px">login</b></a></li>
+
+      {% endif %}
+    
+
+
+
+
+    </ul>
+  </div>
+</nav>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Profile</h4>
+        </div>
+        <div class="modal-body">
+          <p><b>Name : </b><span style="color: green;font-size: 18px">{{user.username}}</span></p>
+          <p>This is your Profile</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}

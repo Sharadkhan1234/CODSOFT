@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>	
+	<title></title>
+</head>
+<body>
+	{% for i in data %}
+<div style="border: 1px solid white;display: inline-block;margin-left: 9%;margin-top: 1%">
+	<a href="{% url 'sub'  i.id %}">
+
+	<img style="width: 130px" src={{i.image.url}}><br><br></a>
+	<h4 style="color: grey;margin: 0">{{i.brand}}</h4>
+<p style="margin: 0">{{i.name}} </p>
+
+</div>
+
+
+    {% endfor %}
+  
+      
+</body>
+</html>
+
+
+
+
+
+ 

@@ -1,0 +1,163 @@
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title></title>
+</head>
+<body>
+
+{% if data2 %}
+	{% for p in data2 %}
+
+  <div class="container" style="display: flex; margin: 40px auto; width: 100%;padding-left: 10%" class="flex-box">
+  <div class="left">
+    <a style="text-decoration: none; color: black" href="{% url 'product' p.id %}">
+    <img src="{{p.image.url}}"width=90%><br>  
+
+  </div>
+  
+
+  <div class="content">
+  <div class="right">
+    <h2>{{p.name}}</h2>
+    <p style="color: green"><b>{{p.brand}}</b></p>
+    <ul>
+      <li><h4>{{p.d1}}</h4></li>
+      <li><h4>{{p.d2}}</h4></li>
+      <li><h4>{{p.d3}}</h4></li>
+      <li><h4>{{p.d4}}</h4></li>
+    </ul></a>
+
+        
+        
+  </div>
+ <button class="btn btn-default" onclick="dislike()"  id="likee">-</button>
+  <span id="value">0</span>  
+  <button class="btn btn-default" onclick="like() ,ss()" id="dislikee">+</button>
+  <!-- <button onclick="">Total</button> -->
+<button class="btn btn-success"  onclick="dd()">Buy now</button>
+    </div>
+    <div style="margin-left: 15%">
+    <h1>₹{{p.price}}</h1>
+</div>
+    </div>
+    <hr>
+	<!-- <div class="container">
+    <div class="wrapper">
+    <img style="width: 20%" class="col-sm-4" src="{{p.image.url}}">
+	<h1>{{p.name}}</h1>
+	<p style="color: green; font-size: 18px">{{p.brand}}</p>
+	<h1>₹{{p.price}}</h1>
+ -->
+
+	<input type="hidden" name="" id="price" value="{{p.price}}">
+  <input type="hidden" name="" id="proid" value="{{p.id}}">
+  <input type="hidden" name="" id="t" >
+  <input type="hidden" name="" id="ddss" >
+   
+
+
+	
+</div>
+</div>
+
+   <script>
+
+
+   	var likee = 0;   		
+   		document.getElementById('value').innerHTML=likee;
+   		function like(){
+   			likee = likee+1;
+   			document.getElementById("value").innerHTML=likee;
+        $("#t").val(likee);
+   		
+   	}
+
+   		var dislikee = 0;   		
+   		document.getElementById('value').innerText=dislikee;
+   		function dislike(){
+
+   		dislikee=likee--;
+   		document.getElementById('value').innerText=dislikee;
+   	}
+
+   </script>
+
+	{% endfor %}
+
+{% else %}
+
+<marquee><h1>Sorry! We Lose !!</h1></marquee>
+{% endif %}
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+
+function ss(){
+
+var idd  = $("#proid").val();
+var q  = $("#t").val();
+
+$.ajax({
+  method: "GET",
+  url: "http://127.0.0.1:1234/cat",
+  data: { idd: parseInt(idd),q:parseInt(q) }
+})
+  .done(function( msg ) {
+                $("#ddss").val(msg);
+
+  });
+
+
+}
+
+
+
+function dd(){
+
+
+     
+
+ var price = $("#ddss").val();
+  console.log(price)
+
+
+
+
+  var options = {
+  key: "rzp_test_zSckZCayXhAwZW",
+  amount: parseInt(price)+'00',
+  currency: "INR",
+  name: "My Project",
+  order_id: "",
+  callback_url: "{{ callback_url }}",
+  };
+
+  var rzp1 = new Razorpay(options);   
+  // document.getElementById("pay-btn").onclick = function (e) {
+
+
+
+
+  rzp1.open();
+  // e.preventDefault();
+  // };
+
+}
+</script> 
+</html>

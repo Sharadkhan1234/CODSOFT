@@ -1,0 +1,48 @@
+{% include 'header.html' %}
+
+
+	{% if data2	 %}
+
+	{% for j in data2  %}
+
+<div class="container" style="display: flex; margin: 40px auto; width: 100%;padding-left: 10%" class="flex-box">
+	<div class="left">
+		<a style="text-decoration: none; color: black" href="{% url 'product' j.id %}">
+		<img src="{{j.img.url}}"width=90%><br>	
+
+	</div>
+	
+
+	<div class="content">
+	<div class="right">
+		<h2>{{j.name}}</h2>
+		<h1>₹{{j.price}}</h1>
+		<p style="color: green"><b>{{j.brand}}</b></p>
+		<ul>
+			<li><h4>{{j.d1}}</h4></li>
+			<li><h4>{{j.d2}}</h4></li>
+			<li><h4>{{j.d3}}</h4></li>
+			<li><h4>{{j.d4}}</h4></li>
+		</ul>
+
+        
+        
+	</div>
+    </div>
+    </div></a>
+    <hr>
+
+
+	{% endfor %}
+
+	{% else %}
+    
+
+    <marquee style="width: 70%;"><h1>This item is out of stock</h1></marquee>
+	
+
+	{% endif %}
+
+</body>
+</html>
+
